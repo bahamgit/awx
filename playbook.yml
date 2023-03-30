@@ -1,0 +1,17 @@
+---
+- name: install packages
+  hosts: all
+  vars_files:
+    - vaultfile.yml
+
+  tasks:
+    - name: install packages with apt
+      ansible.builtin.apt:
+        name: "{{ paquet }}" 
+        state: latest 
+        update_cache: true
+
+    - name: create file testvault
+      ansible.builtin.file: 
+        path: /etc/{{ testvault }} 
+        state: touch
